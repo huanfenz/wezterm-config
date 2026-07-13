@@ -7,6 +7,7 @@ local M = {}
 M.CONFIG_DIR = wezterm.config_dir
 
 M.COLOR_SCHEMES = {
+    "Catppuccin Frappe",
     "Ayu Mirage",
     "Tokyo Night",
     "Catppuccin Mocha",

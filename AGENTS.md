@@ -58,5 +58,4 @@ wezterm show-keys
 - `wezterm.target_triple` 在 Windows 上包含 `"windows"` 子串，`utils.is_windows()` 以此判断平台
 - `config/telnet.lua` 中的 Telnet 条目依赖 **PuTTY** 的 `plink.exe`，需安装 PuTTY 到 `C:\Program Files\PuTTY\` 或修改对应路径；快捷键 `Ctrl+Shift+E` 弹出 Telnet 目标选择器
 - `config/telnet.lua` 通过 `table.insert(config.keys, ...)` 自行注入按键，加载顺序必须排在 `keybindings.lua` 之后
-- 默认配色 `catppuccin-frappe` 不在 `constants.COLOR_SCHEMES` 列表中，通过 `Ctrl+Shift+S` 切换后将无法回到默认配色，需重启
 - SSH 域 `multiplexing = "None"`，每次连接建立全新 SSH 会话
