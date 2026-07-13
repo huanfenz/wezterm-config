@@ -3,6 +3,12 @@ local M = {}
 function M.apply(config)
     config.ssh_domains = {
         {
+            name = "90编译服务器",
+            remote_address = "192.168.201.90:22",
+            username = "wangpeng",
+            multiplexing = "None",
+        },
+        {
             name = "106编译服务器",
             remote_address = "192.168.201.106:22",
             username = "wangpeng",
