@@ -21,11 +21,10 @@ function M.apply(config)
     end
 
     config.keys = {
-        -- ========== 窗口管理 ==========
+        -- ========== [ok]窗口管理 ==========
         { key = "F11", mods = "NONE", action = act.ToggleFullScreen },
-        { key = "M", mods = "CTRL|SHIFT", action = act.Hide },
 
-        -- ========== 标签页管理 (Chrome 风格，除了W和T避免与bash冲突) ==========
+        -- ========== [ok]标签页管理 (Chrome 风格，除了W和T避免与bash冲突) ==========
         { key = "T", mods = "CTRL|SHIFT", action = act.SpawnTab("CurrentPaneDomain") },
         { key = "W", mods = "CTRL|SHIFT", action = act.CloseCurrentPane({ confirm = false }) },
         { key = "F4", mods = "CTRL", action = act.CloseCurrentTab({ confirm = false }) },
@@ -44,6 +43,8 @@ function M.apply(config)
         { key = "7", mods = "CTRL", action = act.ActivateTab(6) },
         { key = "8", mods = "CTRL", action = act.ActivateTab(7) },
         { key = "9", mods = "CTRL", action = act.ActivateLastTab },
+
+        -- ========== [ok]定制功能：F2重命名当前标签页 ==========
         {
             key = "F2",
             mods = "NONE",
@@ -61,19 +62,19 @@ function M.apply(config)
         { key = "_", mods = "ALT|SHIFT", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
         { key = "+", mods = "ALT|SHIFT", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
 
-        -- ========== 窗格导航 (Alt + 方向键) ==========
+        -- ========== [ok]窗格导航 (Alt + 方向键) ==========
         { key = "LeftArrow", mods = "ALT", action = act.ActivatePaneDirection("Left") },
         { key = "DownArrow", mods = "ALT", action = act.ActivatePaneDirection("Down") },
         { key = "UpArrow", mods = "ALT", action = act.ActivatePaneDirection("Up") },
         { key = "RightArrow", mods = "ALT", action = act.ActivatePaneDirection("Right") },
 
-        -- ========== 窗格大小调整 (Alt+Shift + 方向键) ==========
+        -- ========== [ok]窗格大小调整 (Alt+Shift + 方向键) ==========
         { key = "LeftArrow", mods = "ALT|SHIFT", action = act.AdjustPaneSize({ "Left", 5 }) },
         { key = "DownArrow", mods = "ALT|SHIFT", action = act.AdjustPaneSize({ "Down", 5 }) },
         { key = "UpArrow", mods = "ALT|SHIFT", action = act.AdjustPaneSize({ "Up", 5 }) },
         { key = "RightArrow", mods = "ALT|SHIFT", action = act.AdjustPaneSize({ "Right", 5 }) },
 
-        -- ========== 复制粘贴 ==========
+        -- ========== [ok]复制粘贴 ==========
         { key = "Insert", mods = "CTRL", action = act.CopyTo("Clipboard") },
         { key = "Insert", mods = "SHIFT", action = act.PasteFrom("Clipboard") },
 
