@@ -2,14 +2,11 @@ local M = {}
 
 function M.apply(config)
     config.launch_menu = {
-        -- Shell
-        { label = "Bash",           args = { "bash", "-l" } },
-        { label = "Zsh",            args = { "zsh", "-l" } },
-        { label = "Pwsh",           args = { "pwsh.exe", "-NoLogo" } },
-        { label = "PowerShell",     args = { "powershell.exe", "-NoLogo" } },
+        -- Shell（指定 DefaultDomain 则在本地打开）
+        -- { label = "PowerShell",     args = { "powershell.exe", "-NoLogo" },     domain = "DefaultDomain" },
 
-        -- WSL 发行版
-        { label = "WSL: fedora",    args = { "wsl.exe", "-d", "fedora" } },
+        -- 默认WSL
+        -- { label = "WSL: Default",    args = { "wsl.exe" },       domain = "DefaultDomain" },
     }
 end
 

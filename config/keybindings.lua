@@ -58,9 +58,9 @@ function M.apply(config)
             }),
         },
 
-        -- ========== 窗格分割 (Windows Terminal 风格) ==========
-        { key = "_", mods = "ALT|SHIFT", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
-        { key = "+", mods = "ALT|SHIFT", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+        -- ========== [ok]窗格分割 (Windows Terminal 风格) ==========
+        { key = "-", mods = "ALT|SHIFT", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+        { key = "/", mods = "ALT|SHIFT", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
 
         -- ========== [ok]窗格导航 (Alt + 方向键) ==========
         { key = "LeftArrow", mods = "ALT", action = act.ActivatePaneDirection("Left") },
@@ -78,88 +78,41 @@ function M.apply(config)
         { key = "Insert", mods = "CTRL", action = act.CopyTo("Clipboard") },
         { key = "Insert", mods = "SHIFT", action = act.PasteFrom("Clipboard") },
 
-        -- ========== 搜索与滚动 ==========
+        -- ========== [ok]搜索与滚动 ==========
         { key = "F", mods = "CTRL|SHIFT", action = act.Search("CurrentSelectionOrEmptyString") },
         { key = "K", mods = "CTRL|SHIFT", action = act.ClearScrollback("ScrollbackAndViewport") },
         { key = "Home", mods = "CTRL|SHIFT", action = act.ScrollToTop },
         { key = "End", mods = "CTRL|SHIFT", action = act.ScrollToBottom },
 
-        -- ========== 复制模式 ==========
-        { key = "X", mods = "CTRL|SHIFT", action = act.ActivateCopyMode },
+        -- ========== [ok]复制模式 ==========
+        -- { key = "X", mods = "CTRL|SHIFT", action = act.ActivateCopyMode },
 
-        -- ========== 启动器 ==========
+        -- ========== [ok]启动器 ==========
+        {
+            key = "Space",
+            mods = "CTRL",
+            action = act.ShowLauncherArgs({
+                flags = "FUZZY|LAUNCH_MENU_ITEMS|DOMAINS",
+            }),
+        },
         {
             key = "P",
             mods = "CTRL|SHIFT",
             action = act.ShowLauncherArgs({
-                flags = "FUZZY|LAUNCH_MENU_ITEMS",
-            }),
-        },
-        {
-            key = "Space",
-            mods = "CTRL|SHIFT",
-            action = act.ShowLauncherArgs({
-                flags = "FUZZY|LAUNCH_MENU_ITEMS|DOMAINS|KEY_ASSIGNMENTS",
+                flags = "FUZZY|KEY_ASSIGNMENTS",
             }),
         },
 
-        -- ========== 配色方案切换 ==========
+        -- ========== [ok]快捷设置 ==========
         {
-            key = "S",
-            mods = "CTRL|SHIFT",
-            action = act.InputSelector({
-                title = "选择配色方案",
-                choices = color_scheme_choices,
-                action = wezterm.action_callback(function(window, _pane, _id, label)
-                    if label then
-                        window:set_config_overrides({ color_scheme = label })
-                        wezterm.log_info("配色方案已切换为: " .. label)
-                    end
-                end),
-            }),
-        },
-
-        -- ========== SSH 域连接 ==========
-        {
-            key = "D",
-            mods = "CTRL|SHIFT",
-            action = act.ShowLauncherArgs({
-                flags = "FUZZY|DOMAINS",
-            }),
-        },
-
-        -- ========== 快捷设置 ==========
-        {
-            key = "Q",
-            mods = "CTRL|SHIFT",
+            key = ",",
+            mods = "CTRL",
             action = act.InputSelector({
                 title = "快捷设置",
                 choices = quick_settings.get_choices(),
                 action = wezterm.action_callback(function(window, _pane, id, _label)
                     if id then
                         quick_settings.toggle(window, id)
-                    end
-                end),
-            }),
-        },
-
-        -- ========== 背景图片 ==========
-        {
-            key = "N",
-            mods = "CTRL|SHIFT",
-            action = wezterm.action_callback(function(window, _pane)
-                bg.next(window)
-            end),
-        },
-        {
-            key = "I",
-            mods = "CTRL|SHIFT",
-            action = act.InputSelector({
-                title = "选择背景图片",
-                choices = bg.get_image_choices(),
-                action = wezterm.action_callback(function(window, _pane, _id, label)
-                    if label then
-                        bg.select_image(window, label)
                     end
                 end),
             }),
