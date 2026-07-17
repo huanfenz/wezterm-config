@@ -84,6 +84,11 @@ function M.apply(config)
         { key = "Home", mods = "CTRL|SHIFT", action = act.ScrollToTop },
         { key = "End", mods = "CTRL|SHIFT", action = act.ScrollToBottom },
 
+        -- ========== [ok]缩放 (Ctrl+/-/0) ==========
+        { key = "=", mods = "CTRL", action = act.IncreaseFontSize },
+        { key = "-", mods = "CTRL", action = act.DecreaseFontSize },
+        { key = "0", mods = "CTRL", action = act.ResetFontSize },
+
         -- ========== [ok]复制模式 ==========
         -- { key = "X", mods = "CTRL|SHIFT", action = act.ActivateCopyMode },
 
