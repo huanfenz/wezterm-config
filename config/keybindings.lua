@@ -122,6 +122,15 @@ function M.apply(config)
                 end),
             }),
         },
+
+        -- ========== [ok]工具 ==========
+        {
+            key = "<",
+            mods = "CTRL|SHIFT",
+            action = wezterm.action_callback(function()
+                wezterm.run_child_process({ "explorer", wezterm.config_dir })
+            end),
+        },
     }
 end
 
