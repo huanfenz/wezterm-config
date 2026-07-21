@@ -1,22 +1,18 @@
 local M = {}
 
--- Telnet 目标列表（可随时增减）
+local PLINK = "C:\\Program Files\\PuTTY\\plink.exe"
+
+local function plink(host)
+    return {
+        "powershell.exe", "-NoProfile", "-NoLogo", "-Command",
+        "[Console]::OutputEncoding = [Text.Encoding]::UTF8; & '" .. PLINK .. "' -telnet '" .. host .. "'",
+    }
+end
+
 M.TELNET_TARGETS = {
-    {
-        label = "130.30.212.18",
-        args = { "C:\\Program Files\\PuTTY\\plink.exe", "-telnet", "130.30.212.18" },
-        domain = "DefaultDomain",
-    },
-    {
-        label = "192.168.183.102",
-        args = { "C:\\Program Files\\PuTTY\\plink.exe", "-telnet", "192.168.183.102" },
-        domain = "DefaultDomain",
-    },
-    {
-        label = "130.30.6.11",
-        args = { "C:\\Program Files\\PuTTY\\plink.exe", "-telnet", "130.30.6.11" },
-        domain = "DefaultDomain",
-    },
+    { label = "130.30.212.18",    args = plink("130.30.212.18"),    domain = "DefaultDomain" },
+    { label = "192.168.183.102",  args = plink("192.168.183.102"),  domain = "DefaultDomain" },
+    { label = "130.30.6.11",      args = plink("130.30.6.11"),      domain = "DefaultDomain" },
 }
 
 function M.apply(config)
