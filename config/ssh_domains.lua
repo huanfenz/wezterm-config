@@ -22,6 +22,12 @@ function M.apply(config)
             username = "wangpeng",
             multiplexing = "None",
         },
+        {
+            name = "我的OECT NAS",
+            remote_address = "192.168.50.142:22",
+            username = "root",
+            multiplexing = "None",
+        },
     }
 end
 

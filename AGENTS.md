@@ -48,8 +48,8 @@ wezterm show-keys
 
 ## 重载配置
 
-- 在 WezTerm 窗口内按 `Ctrl+Shift+R` 热重载
-- 或关闭并重新启动 WezTerm
+- WezTerm 自动监视配置文件变化并热重载，无需手动操作
+- 或关闭并重新启动 WezTerm（会触发会话自动恢复）
 
 ## 注意
 
@@ -59,3 +59,15 @@ wezterm show-keys
 - `config/telnet.lua` 中的 Telnet 条目依赖 **PuTTY** 的 `plink.exe`，需安装 PuTTY 到 `C:\Program Files\PuTTY\` 或修改对应路径；快捷键 `Ctrl+Shift+E` 弹出 Telnet 目标选择器
 - `config/telnet.lua` 通过 `table.insert(config.keys, ...)` 自行注入按键，加载顺序必须排在 `keybindings.lua` 之后
 - SSH 域 `multiplexing = "None"`，每次连接建立全新 SSH 会话
+
+## 会话保存与恢复（resurrect）
+
+- `config/resurrect.lua` 基于第三方插件 [resurrect.wezterm](https://github.com/MLFlexer/resurrect.wezterm)（原仓库已归档，仍可用）实现标签页布局的保存与恢复
+- 插件通过 `wezterm.plugin.require()` 自动下载到 `%APPDATA%\wezterm\plugins\`（还依赖 chrisgve/dev.wezterm）；首次下载需网络代理
+- 状态文件保存在 `~/.local/share/wezterm/resurrect/`（json 格式，含窗口/标签/窗格布局与终端输出，注意可能含敏感内容）
+- 行为：纯手动。`Ctrl+Shift+S` 输入名称保存当前工作区布局；`Ctrl+Shift+R` 选择工作区恢复到当前窗口（关闭已有标签）；`Ctrl+Shift+D` 选择工作区删除状态文件。无自动保存、无启动自动恢复
+- SSH 域标签页（`config/ssh_domains.lua` 定义的域）恢复时会自动重新连接；Telnet（plink）标签页只恢复布局和输出文本，需手动重连（`Ctrl+Shift+E`）
+- 插件的 `change_state_save_dir()` 在 Windows 上有 mkdir 引号 bug，模块中改为手动建目录后直接赋值 `state_manager.save_state_dir`，勿改回官方 API
+- 插件加载时会执行 3 条残缺 mkdir 命令（`os.execute`），每次闪一个 cmd 黑框；模块在 `require` 插件期间临时屏蔽了 `os.execute`，勿删除该屏蔽代码
+- 插件的 fuzzy 选择器在 Windows 上用 wscript(VBS) 扫描状态目录（慢且闪黑框），已弃用；`Ctrl+Shift+R` 改为模块内用 `wezterm.read_dir` 即时扫描 + 原生 `InputSelector` 实现
+- `config/resurrect.lua` 通过 `table.insert(config.keys, ...)` 自行注入按键，加载顺序必须排在 `keybindings.lua` 之后

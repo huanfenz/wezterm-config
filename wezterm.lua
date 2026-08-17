@@ -24,6 +24,7 @@ local modules = {
     "config.background",
     "config.quick_settings",
     "config.keybindings",
+    "config.resurrect",
     "config.telnet",
     "config.mouse",
     "config.advanced",
