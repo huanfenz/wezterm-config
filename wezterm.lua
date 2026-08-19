@@ -26,6 +26,7 @@ local modules = {
     "config.keybindings",
     "config.resurrect",
     "config.telnet",
+    "config.split_launcher",
     "config.mouse",
     "config.advanced",
     "config.hyperlink",
