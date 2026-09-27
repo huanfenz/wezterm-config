@@ -55,6 +55,7 @@ wezterm show-keys
 
 - `config.keybindings.lua` 中 `disable_default_key_bindings = true`，默认快捷键全部禁用，新增绑定需自行定义完整动作
 - 多模块可能写同一嵌套表（如 `config.colors`），设置子字段前先用 `config.colors = config.colors or {}` 保护，避免覆盖先前模块的字段
+- 搜索模式的"当前匹配项"本质是选区，WezTerm 在**线性色彩空间**把选区色按 alpha 叠在单元格底色之上（已实测标定，勿按 sRGB 直算）；`config/colors.lua` 用一个半透明 `colors.selection_bg` 解耦两处效果：划选（叠深背景）合成主题原划选色 #626880，搜索当前项（叠 `colors.copy_mode_active_highlight_bg` 金黄垫底）合成 #f2d078，调色需按线性混合联立求解；划选文字保持原色靠 `selection_fg = 'none'`；非当前搜索项用 `colors.copy_mode_inactive_highlight_*`
 - `wezterm.target_triple` 在 Windows 上包含 `"windows"` 子串，`utils.is_windows()` 以此判断平台
 - `config/telnet.lua` 中的 Telnet 条目依赖 **PuTTY** 的 `plink.exe`，需安装 PuTTY 到 `C:\Program Files\PuTTY\` 或修改对应路径；快捷键 `Ctrl+Shift+E` 弹出 Telnet 目标选择器
 - `config/telnet.lua` 通过 `table.insert(config.keys, ...)` 自行注入按键，加载顺序必须排在 `keybindings.lua` 之后
